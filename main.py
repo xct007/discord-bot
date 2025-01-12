@@ -5,7 +5,7 @@ import random
 import sys
 from pathlib import Path
 
-import aiosqlite
+# import aiosqlite
 import discord
 from discord.ext import commands, tasks
 from discord.ext.commands import Context
