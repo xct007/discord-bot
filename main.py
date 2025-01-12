@@ -12,7 +12,7 @@ from discord.ext.commands import Context
 
 from dotenv import load_dotenv
 
-from database.manager import DatabaseManager
+# from database.manager import DatabaseManager
 
 # API client
 from libs.client import AuthenticatedClient
@@ -20,7 +20,7 @@ from libs.client import AuthenticatedClient
 # Constants
 BASE_DIR = Path(__file__).resolve().parent
 CONFIG_PATH = BASE_DIR / "config.json"
-DATABASE_DIR = BASE_DIR / "database"
+# DATABASE_DIR = BASE_DIR / "database"
 COGS_DIR = BASE_DIR / "cogs"
 LOG_FILE = BASE_DIR / "discord.log"
 # get process PID
@@ -92,19 +92,19 @@ class DiscordBot(commands.Bot):
         )
         self.logger = logger
         self.config = config
-        self.database = None
+        # self.database = None
 
         self.api_client = AuthenticatedClient(
             base_url=os.getenv("API_BASE_URL"), token=os.getenv("API_TOKEN")
         )
 
-    async def init_db(self) -> None:
-        db_path = DATABASE_DIR / "database.db"
-        schema_path = DATABASE_DIR / "schema.sql"
-        async with aiosqlite.connect(db_path) as db:
-            with open(schema_path) as file:
-                await db.executescript(file.read())
-            await db.commit()
+    # async def init_db(self) -> None:
+    #     db_path = DATABASE_DIR / "database.db"
+    #     schema_path = DATABASE_DIR / "schema.sql"
+    #     async with aiosqlite.connect(db_path) as db:
+    #         with open(schema_path) as file:
+    #             await db.executescript(file.read())
+    #         await db.commit()
 
     async def load_cogs(self) -> None:
         for file in COGS_DIR.glob("*.py"):
@@ -140,8 +140,8 @@ class DiscordBot(commands.Bot):
 
         self.status_task.start()
 
-        db_connection = await aiosqlite.connect(DATABASE_DIR / "database.db")
-        self.database = DatabaseManager(connection=db_connection)
+        # db_connection = await aiosqlite.connect(DATABASE_DIR / "database.db")
+        # self.database = DatabaseManager(connection=db_connection)
 
     async def on_message(self, message: discord.Message) -> None:
         if message.author.bot:
