@@ -135,7 +135,7 @@ class DiscordBot(commands.Bot):
         self.logger.info(f"Logged in as {self.user.name}")
         self.logger.info(f"PID: ${PID}")
         self.logger.info("-------------------")
-        await self.init_db()
+        # await self.init_db()
         await self.load_cogs()
 
         self.status_task.start()
